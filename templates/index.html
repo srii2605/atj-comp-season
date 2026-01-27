@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>ATJ ANNUAL RECITAL 2025</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;
+  --badge-green-bg:#ecfdf5;--badge-green:#065f46;           /* Combined Rehearsal */
+  --badge-purple-bg:#f5f3ff;--badge-purple:#5b21b6;         /* In-Studio Tech */
+  --badge-blue-bg:#eff6ff;--badge-blue:#1e40af;             /* Fallback */
+  --badge-orange-bg:#fff7ed;--badge-orange:#c2410c;         /* Show Day 1 */
+  --badge-teal-bg:#f0fdfa;--badge-teal:#0f766e;             /* Show Day 2 */
+  --badge-pink-bg:#fdf2f8;--badge-pink:#be185d;             /* Mediacorp Tech */
+  --badge-yellow-bg:#fefce8;--badge-yellow:#854d0e;         /* Rehearsal w/ Ms Abi/Chelsea */
+  --row-alt:#fafafa;--chip-bg:#f3f4f6;--chip-on:#111827;
+  --chip-active-bg:#111827;--chip-active:#fff;--hl:#fff3bf;
+  --card-bg:#fff;
+  --fs-th:12px;
+  --fs-td:11px;   /* base */
+  --fs-label:11px
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+.container{max-width:100%;margin:24px auto;padding:0 12px}
+
+/* Top section */
+h1{font-size:24px;font-weight:800;margin:0 0 6px;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.underline-title{font-size:14px;font-weight:700;margin:4px 0 12px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;position:relative}
+.underline-title::after{content:"";display:block;height:3px;margin-top:6px;background:linear-gradient(90deg,#111827,transparent 80%);border-radius:2px}
+
+.grid{display:grid;grid-template-columns:1fr;gap:16px;margin:14px 0 10px}
+.card{border:1px solid var(--line);border-radius:14px;padding:12px;background:var(--card-bg)}
+.card h3{margin:0 0 6px;font-size:16px}
+.muted{color:var(--muted);font-size:14px;line-height:1.45}.muted div{margin:4px 0}
+
+/* Search + chips */
+.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin:12px 0}
+.search{flex:1 1 320px;max-width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:12px;font-size:14px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.chip{display:inline-flex;align-items:center;gap:.4rem;border:1px solid var(--line);background:var(--chip-bg);color:var(--chip-on);border-radius:10px;padding:8px 10px;font-size:var(--fs-th);font-weight:600;cursor:pointer;user-select:none}
+.chip.active{background:var(--chip-active-bg);color:var(--chip-active);border-color:var(--chip-active-bg)}
+
+/* Table (desktop) */
+.table-wrap{display:none}
+table{width:100%;border-collapse:separate;border-spacing:0;table-layout:auto;margin-top:12px}
+thead th{position:sticky;top:0;background:#f8f8f8;z-index:1;text-align:left;font-weight:600;font-size:var(--fs-th);padding:10px;border-bottom:1px solid var(--line)}
+tbody td{
+  padding:10px;border-bottom:1px solid var(--line);
+  font-size:var(--fs-td);vertical-align:top;
+  white-space:normal;word-break:keep-all;overflow-wrap:normal;hyphens:none;
+  line-height:1.35
+}
+tbody tr:nth-child(even){background:var(--row-alt)}
+/* Emphasis */
+td:nth-child(2){font-weight:700}          /* Event Day & Date bold */
+td:nth-child(4){font-weight:700}          /* Event Location bold */
+td:nth-child(11){font-style:italic}       /* Class Name italic */
+
+/* Badges */
+.badge{display:inline-flex;align-items:center;padding:4px 8px;border-radius:999px;font-weight:700;font-size:12px;line-height:1;white-space:nowrap}
+.badge.green{background:var(--badge-green-bg);color:var(--badge-green)}
+.badge.purple{background:var(--badge-purple-bg);color:var(--badge-purple)}
+.badge.blue{background:var(--badge-blue-bg);color:var(--badge-blue)}
+.badge.orange{background:var(--badge-orange-bg);color:var(--badge-orange)}
+.badge.teal{background:var(--badge-teal-bg);color:var(--badge-teal)}
+.badge.pink{background:var(--badge-pink-bg);color:var(--badge-pink)}
+.badge.yellow{background:var(--badge-yellow-bg);color:var(--badge-yellow)}
+
+/* Keep times on one line */
+td:nth-child(5),td:nth-child(6),td:nth-child(7){white-space:nowrap}
+
+/* Prevent breaking words everywhere */
+th, td, .row-card, .item, .row-title, .muted, .remark {
+  word-break: keep-all;
+  overflow-wrap: normal;
+  hyphens: none;
+}
+
+/* Let Event Type wrap inside the pill (at spaces only) and trim its width */
+td:first-child .badge{
+  white-space:normal;           /* allow wrap at spaces */
+  line-height:1.2;
+  display:inline-block;
+}
+@media (min-width:901px){
+  th:nth-child(1), td:nth-child(1){width:180px}   /* narrower Event Type column */
+}
+
+/* Give Footwear a bit more room so it fits one line */
+@media (min-width:901px){
+  th:nth-child(9), td:nth-child(9){min-width:130px}
+}
+
+/* Center reporting & dismissal times on desktop only */
+@media (min-width:901px){
+  td:nth-child(5), td:nth-child(7){text-align:center}
+}
+
+/* Mobile cards */
+#cards{display:grid;gap:12px;margin-top:12px}
+.row-card{border:1px solid var(--line);border-radius:14px;background:var(--card-bg);padding:10px}
+.row-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}
+.row-title{font-size:var(--fs-td);font-weight:700}
+.row-grid{display:grid;grid-template-columns:1fr;gap:8px}
+.item{font-size:var(--fs-td)}
+.item .label,.remark .label{font-size:var(--fs-label);color:var(--muted);display:block;margin-bottom:2px}
+.times{display:grid;grid-template-columns:1fr;gap:6px}
+.remark{margin-top:8px;font-size:var(--fs-td)}
+.chip-inline{display:inline-flex;gap:6px;flex-wrap:wrap}
+
+/* Desktop adjustments */
+@media (min-width:901px){
+  .container{max-width:100%;margin:32px auto;padding:0 24px}
+  h1{font-size:32px;white-space:normal}
+  .underline-title{font-size:18px;white-space:normal;margin-bottom:20px}
+  .grid{grid-template-columns:1fr 1fr;gap:24px;margin:18px 0 12px}
+  .card{padding:16px}.card h3{font-size:18px}
+  .controls{gap:10px;margin:16px 0}.search{max-width:900px;padding:12px 14px;font-size:16px}
+  .chips{gap:8px}.chip{padding:10px 14px;font-size:15px}
+  .table-wrap{display:block}#cards{display:none}
+  :root{--fs-th:13px;--fs-td:12px;--fs-label:12px}
+  thead th{padding:12px}tbody td{padding:12px;line-height:1.35}
+  .badge{font-size:13px;padding:6px 10px}
+  .row-grid{grid-template-columns:1fr 1fr}
+}
+
+/* Mobile-only tweaks */
+@media (max-width:900px){
+  h1{font-size:20px}
+  .underline-title{font-size:12px}
+  .card h3{font-size:14px}
+  .muted{font-size:13px}
+  :root{ --fs-td:12px }
+  .item .label,.remark .label{font-size:11px}
+}
+@media print{.controls,.grid,#cards{display:none}.container{max-width:unset;margin:0;padding:0}thead th,tbody td{font-size:12px;padding:8px}}
+
+/* === NEW: clickable headers + sort arrows === */
+thead th{ cursor:pointer; }
+thead th.asc::after { content:" ▲"; font-size:0.85em; color:#1e40af; }
+thead th.desc::after { content:" ▼"; font-size:0.85em; color:#1e40af; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>ATJ ANNUAL RECITAL 2025</h1>
+  <div class="underline-title">REHEARSAL &amp; PERFORMANCE SCHEDULE</div>
+
+  <div class="grid" aria-label="Locations">
+    <div class="card">
+      <h3>Combined Rehearsals - at ATJ outlets:</h3>
+      <div class="muted">
+        <div><strong>Forum The Shopping Mall:</strong> 583 Orchard Road, #02–05/06/07, Singapore 238884</div>
+        <div><strong>I12 Katong:</strong> 112 East Coast Road, #03–14/15, Singapore 428802</div>
+        <div><strong>10 Winstedt Road:</strong> #01–05/06/07/08, Singapore 227977</div>
+        <div><strong>Prinsep:</strong> 36 Prinsep St, Level 4, Singapore 188648</div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>In-Studio &amp; Mediacorp Technical Rehearsals:</h3>
+      <div class="muted">
+        <div><strong>In-Studio Tech:</strong> Performance &amp; Training Centre, 36 Prinsep St, 04–01, S188638</div>
+        <div><strong>Mediacorp Tech &amp; Shows:</strong> The Theatre at Mediacorp, 1 Stars Ave, S138507</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="controls"><input id="search" class="search" placeholder="Search by student's full name" aria-label="Search by student's full name"/></div>
+
+  <div class="chips" role="tablist" aria-label="Quick filters">
+    <div class="chip active" data-filter="all" role="tab" aria-selected="true">⭐ All</div>
+    <div class="chip" data-filter="combined" role="tab" aria-selected="false">👥 Combined Rehearsal</div>
+    <div class="chip" data-filter="tech" role="tab" aria-selected="false">🎭 Technical Rehearsal</div>
+    <div class="chip" data-filter="show" role="tab" aria-selected="false">🎬 Show Day</div>
+    <!-- Student Leader chip (revealed only when full-name match + SL events) -->
+    <div class="chip" data-filter="student-leader" role="tab" aria-selected="false" id="studentLeaderChip" style="display:none;">🧑‍🎓 Student Leader Schedule</div>
+  </div>
+
+  <div id="msg" class="helper hidden"></div>
+
+  <div class="table-wrap" aria-live="polite">
+    <table>
+      <thead><tr>
+        <th>Event Type</th><th>Event Day &amp; Date</th><th>Student Name</th><th>Event Location</th>
+        <!-- ↓ swapped order -->
+        <th>Reporting Time</th><th>Event Time</th><th>Dismissal Time</th><th>Full Look Guide</th>
+        <th>Footwear</th><th>Dance Routine</th><th>Class Name</th><th>Remarks</th>
+      </tr></thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+
+  <div id="cards" aria-live="polite"></div>
+</div>
+
+<script>
+const BASE="https://docs.google.com/spreadsheets/d/1XFHNeTBRvbO9Hu3rt2Sro2vF9sHS_wW6wzH35bJtgu0/export?format=csv&gid=785015495";
+const COLS=['Event Type','Event Day & Date','Student Name','Event Location','Event Time','Reporting Time','Dismissal Time','Full Look Guide','Footwear','Dance Routine','Class Name','Remarks'];
+const tbody=document.getElementById('tbody'),cards=document.getElementById('cards'),msg=document.getElementById('msg'),searchEl=document.getElementById('search'),chips=[...document.querySelectorAll('.chip')];
+let RAW=[],FILTER='all',QUERY='';
+
+/* CSV helpers */
+function csvToRows(t){const r=[];let a=[],f="",i=0,q=!1;for(;i<t.length;){const c=t[i];if(q){if(c=='"'&&t[i+1]=='"'){f+='"';i+=2;continue}if(c=='"'){q=!1;i++;continue}f+=c;i++}else{if(c=='"'){q=!0;i++;continue}if(c==','){a.push(f);f="";i++;continue}if(c=='\n'||c=='\r'){if(c=='\r'&&t[i+1]=='\n')i++;a.push(f);r.push(a);a=[];f="";i++;continue}f+=c;i++}}if(f.length||a.length){a.push(f);r.push(a)}return r}
+function csvToObjects(csv){const rows=csvToRows(csv);if(!rows.length)return[];const h=rows[0].map(x=>x.trim());return rows.slice(1).map(r=>{const o={};h.forEach((k,i)=>o[k]=r[i]??"");return o})}
+const esc=s=>String(s??'').replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+const oneLine=s=>String(s??'').replace(/\s*[\r\n]+\s*/g,' ').replace(/^"(.*)"$/,'$1');
+function hi(t,q){const s=esc(oneLine(t));if(!q)return s;const re=new RegExp('('+q.replace(/[.*+?^${}()|[\\]\\\\]/g,'\\$&')+')','ig');return s.replace(re,'<mark>$1</mark>')}
+
+/* Helper: ensure URL is absolute */
+function toAbsoluteUrl(u){
+  if(!u) return '';
+  let href = String(u).trim();
+  if(/^www\./i.test(href)) href = 'https://' + href;
+  if(!/^https?:\/\//i.test(href)) href = 'https://' + href;
+  return href;
+}
+
+/* Full Look Guide (unchanged): show pill if URL present, else text with pipes → <br> */
+function linkify(text){
+  if(!text)return'';
+  const t=String(text).trim();
+  const m = t.match(/\bhttps?:\/\/\S+|\bwww\.\S+|\b[a-z0-9.-]+\.[a-z]{2,}(\/\S*)?/i);
+  if(m){
+    const href = toAbsoluteUrl(m[0]);
+    return `<a class="link-pill" href="${esc(href)}" target="_blank" rel="noopener">Open link</a>`;
+  }
+  return esc(t).replace(/\s*\|\s*/g,'<br>');
+}
+
+/* NEW: Remarks → if contains any URL, show a "Dropbox link" pill; else plain text */
+function renderRemarksCell(text){
+  if(!text) return '';
+  const t = String(text).trim();
+  const m = t.match(/\bhttps?:\/\/\S+|\bwww\.\S+/i);
+  if(m){
+    const href = toAbsoluteUrl(m[0]);
+    return `<a class="link-pill" href="${esc(href)}" target="_blank" rel="noopener">Dropbox link</a>`;
+  }
+  return hi(t, QUERY);
+}
+
+/* Badge color logic (Show 1/2; In-Studio; Mediacorp; Ms Abi/Chelsea; Combined) */
+function badge(type){
+  const clean=oneLine(type);
+  const t=String(clean||'').toLowerCase();
+
+  if(t.includes('show day 1')) return `<span class="badge orange">${esc(clean)}</span>`;
+  if(t.includes('show day 2')) return `<span class="badge teal">${esc(clean)}</span>`;
+  if(t.includes('in-studio')||t.includes('in studio')) return `<span class="badge purple">${esc(clean)}</span>`;
+  if(t.includes('mediacorp')) return `<span class="badge pink">${esc(clean)}</span>`;
+  if(t.includes('rehearsal with ms abi') || t.includes('rehearsal with ms chelsea'))
+    return `<span class="badge yellow">${esc(clean)}</span>`;
+  if(t.includes('combined rehearsal')) return `<span class="badge green">${esc(clean)}</span>`;
+  return `<span class="badge blue">${esc(clean)}</span>`;
+}
+
+/* Filters (include Abi/Chelsea under tech) */
+function passFilter(r){
+  const t=String(r['Event Type']||'').toLowerCase();
+  if(FILTER==='combined') return t.includes('combined rehearsal');
+  if(FILTER==='tech')
+    return t.includes('in-studio') || t.includes('in studio') ||
+           t.includes('mediacorp') ||
+           t.includes('rehearsal with ms abi') ||
+           t.includes('rehearsal with ms chelsea');
+  if(FILTER==='show') return t.includes('show');
+  if(FILTER==='student-leader') return t.includes('student leader');
+  return true
+}
+function matchQuery(r){
+  if(!QUERY)return true;
+  const s=QUERY.toLowerCase();
+  return COLS.some(k=>String(r[k]||'').toLowerCase().includes(s))
+}
+
+/* Sorting: Event Day & Date → Reporting Time (earliest → latest) */
+const DEFAULT_YEAR = 2025;
+function parseDateToTS(str){
+  if(!str) return Number.MAX_SAFE_INTEGER;
+  let s=String(str).trim();
+  s=s.replace(/\b(\d+)(st|nd|rd|th)\b/gi,'$1'); // drop ordinals
+  const hasYear=/\b20\d{2}\b/.test(s);
+  let ts=Date.parse(s);
+  if(isNaN(ts)) ts=Date.parse(s+(hasYear?'':`, ${DEFAULT_YEAR}`));
+  return isNaN(ts)?Number.MAX_SAFE_INTEGER:ts;
+}
+function parseTimeToMinutes(str){
+  if(!str) return Number.MAX_SAFE_INTEGER;
+  const m=String(str).trim().match(/(\d{1,2}):(\d{2})\s*([AP]M)?/i);
+  if(!m) return Number.MAX_SAFE_INTEGER;
+  let hh=parseInt(m[1],10), mm=parseInt(m[2],10);
+  const ampm=m[3]?m[3].toUpperCase():null;
+  if(ampm){ if(ampm==='PM'&&hh<12) hh+=12; if(ampm==='AM'&&hh===12) hh=0; }
+  return hh*60+mm;
+}
+function sortRows(rows){
+  return rows.slice().sort((a,b)=>{
+    const dA=parseDateToTS(a['Event Day & Date']);
+    const dB=parseDateToTS(b['Event Day & Date']);
+    if(dA!==dB) return dA-dB;
+
+    const tA=parseTimeToMinutes(a['Reporting Time']);
+    const tB=parseTimeToMinutes(b['Reporting Time']);
+    if(tA!==tB) return tA-tB;
+
+    const etA=parseTimeToMinutes(a['Event Time']);
+    const etB=parseTimeToMinutes(b['Event Time']);
+    if(etA!==etB) return etA-etB;
+
+    return String(a['Student Name']||'').localeCompare(String(b['Student Name']||''));
+  });
+}
+
+/* Desktop table render */
+function renderTable(rows){
+  tbody.innerHTML=rows.length?rows.map(r=>`<tr>
+<td>${badge(r['Event Type'])}</td>
+<td>${hi(r['Event Day & Date'],QUERY)}</td>
+<td>${hi(r['Student Name'],QUERY)}</td>
+<td><strong>${hi(r['Event Location'],QUERY)}</strong></td>
+<td>${hi(r['Reporting Time'],QUERY)}</td>
+<td>${hi(r['Event Time'],QUERY)}</td>
+<td>${hi(r['Dismissal Time'],QUERY)}</td>
+<td>${linkify(r['Full Look Guide'])}</td>
+<td>${hi(r['Footwear'],QUERY)}</td>
+<td>${hi(r['Dance Routine'],QUERY)}</td>
+<td><em>${hi(r['Class Name'],QUERY)}</em></td>
+<td>${renderRemarksCell(r['Remarks'])}</td>
+</tr>`).join(''):`<tr><td colspan="12" class="muted" style="padding:12px;">No results</td></tr>`;
+}
+
+/* Mobile cards render */
+function renderCards(rows){
+  cards.innerHTML=rows.length?rows.map(r=>`<div class="row-card">
+  <div class="row-head">
+    <div class="row-title">${hi(r['Student Name'],QUERY)}</div>
+    <div class="chip-inline">${badge(r['Event Type'])}</div>
+  </div>
+
+  <div class="row-grid" style="margin-top:8px">
+    <div class="item"><span class="label">Event Day &amp; Date</span><strong>${hi(r['Event Day & Date'],QUERY)}</strong></div>
+    <div class="item"><span class="label">Location</span><strong>${hi(r['Event Location'],QUERY)}</strong></div>
+    <div class="item"><span class="label">Reporting Time</span><strong>${hi(r['Reporting Time'],QUERY)}</strong></div>
+    <div class="item"><span class="label">Event Time</span>${hi(r['Event Time'],QUERY)}</div>
+    <div class="item"><span class="label">Dismissal Time</span>${hi(r['Dismissal Time'],QUERY)}</div>
+    <div class="item"><span class="label">Full Look Guide</span>${linkify(r['Full Look Guide'])}</div>
+    <div class="item"><span class="label">Footwear</span>${hi(r['Footwear'],QUERY)}</div>
+    <div class="item" style="margin-bottom:8px"><span class="label">Dance Routine</span>${hi(r['Dance Routine'],QUERY)}</div>
+    <div class="item"><span class="label">Class Name</span><em>${hi(r['Class Name'],QUERY)}</em></div>
+  </div>
+
+  ${r['Remarks']?`<div class="remark"><span class="label">Remarks</span>${renderRemarksCell(r['Remarks'])}</div>`:''}
+</div>`).join(''):`<div class="helper">No results</div>`;
+}
+
+/* === NEW: remember chosen header sort & apply to DOM after each render === */
+let SORT_INDEX = null;   // 0-based th index
+let SORT_ASC = true;
+
+function applySortToDOM(){
+  if(SORT_INDEX===null) return;
+  const table = document.querySelector(".table-wrap table");
+  if(!table) return;
+  const tb = table.tBodies[0];
+  const rows = Array.from(tb.rows);
+  rows.sort((a,b)=>{
+    const aText = (a.cells[SORT_INDEX]?.innerText || "").trim();
+    const bText = (b.cells[SORT_INDEX]?.innerText || "").trim();
+    const cmp = aText.localeCompare(bText, "en", { numeric:true, sensitivity:"base" });
+    return SORT_ASC ? cmp : -cmp;
+  });
+  rows.forEach(r=>tb.appendChild(r));
+
+  // update arrow classes
+  const headers = table.tHead ? table.tHead.rows[0].cells : [];
+  Array.from(headers).forEach((h,i)=>{
+    h.classList.remove("asc","desc");
+    if(i===SORT_INDEX) h.classList.add(SORT_ASC ? "asc" : "desc");
+  });
+}
+
+function wireHeaderClicks(){
+  const headers = document.querySelectorAll(".table-wrap thead th");
+  headers.forEach((th, idx)=>{
+    th.addEventListener("click", ()=>{
+      if(SORT_INDEX===idx){
+        SORT_ASC = !SORT_ASC;
+      }else{
+        SORT_INDEX = idx;
+        SORT_ASC = true;
+      }
+      applySortToDOM();
+    });
+  });
+}
+
+function render(){
+  const filtered=RAW.filter(r=>passFilter(r)&&matchQuery(r));
+  const rows=sortRows(filtered);
+  renderTable(rows);
+  renderCards(rows);
+
+  // Reveal Student Leader chip only when full-name match has SL events
+  const leaderChip=document.getElementById('studentLeaderChip');
+  let leaderCount=0;
+
+  if(QUERY && QUERY.trim().length>0){
+    const qLower=QUERY.toLowerCase().trim();
+    RAW.forEach(r=>{
+      const studentName=String(r['Student Name']||'').toLowerCase().trim();
+      const isLeader=String(r['Event Type']||'').toLowerCase().includes('student leader');
+      if(studentName===qLower && isLeader) leaderCount++;
+    });
+  }
+
+  if(leaderCount>0){
+    leaderChip.style.display='';
+  }else{
+    const wasActive=leaderChip.classList.contains('active');
+    leaderChip.style.display='none';
+    if(wasActive){
+      chips.forEach(c=>{c.classList.remove('active');c.setAttribute('aria-selected','false')});
+      const allChip=document.querySelector('.chip[data-filter="all"]');
+      if(allChip){allChip.classList.add('active');allChip.setAttribute('aria-selected','true')}
+      FILTER='all';
+      const ref=sortRows(RAW.filter(r=>passFilter(r)&&matchQuery(r)));
+      renderTable(ref);
+      renderCards(ref);
+    }
+  }
+
+  /* === NEW: re-apply chosen header sort after every render === */
+  applySortToDOM();
+}
+
+async function load(){
+  try{
+    msg.classList.add('hidden');msg.textContent='';
+    const res=await fetch(`${BASE}&cachebust=${Date.now()}`,{cache:'no-store'});
+    if(!res.ok){const t=await res.text();throw new Error(`HTTP ${res.status} – ${t.slice(0,200)}`)}
+    const csv=await res.text();
+    const objs=csvToObjects(csv);
+    RAW=objs.map(o=>{const x={};COLS.forEach(k=>x[k]=o[k]??'');return x});
+    render();
+  }catch(e){
+    console.error('Load failed',e);
+    msg.textContent='Failed to load data. Please check the CSV link or sharing.';
+    msg.classList.remove('hidden');
+    tbody.innerHTML=`<tr><td colspan="12" class="muted" style="padding:12px;">${esc(e.message)}</td></tr>`;
+    cards.innerHTML=`<div class="helper">${esc(e.message)}</div>`;
+  }
+}
+
+searchEl.addEventListener('input',e=>{QUERY=e.target.value.trim();render()});
+chips.forEach(ch=>ch.addEventListener('click',()=>{
+  chips.forEach(c=>{c.classList.remove('active');c.setAttribute('aria-selected','false')});
+  ch.classList.add('active');ch.setAttribute('aria-selected','true');
+  FILTER=ch.dataset.filter;render();
+}));
+
+/* === NEW: set up header click handlers once === */
+document.addEventListener('DOMContentLoaded', wireHeaderClicks);
+
+load();
+</script>
+</body>
+</html>
