@@ -34,8 +34,26 @@
     /* Header */
     h1{font-size:32px;font-weight:800;margin:0}
     .underline-title{font-size:18px;font-weight:700;margin:6px 0 18px}
-    .underline-title::after{content:"";display:block;height:3px;margin-top:6px;background:#111827;width:260px;border-radius:2px}
+    .underline-title::after{
+  content:"";
+  display:block;
+  height:3px;
+  margin-top:6px;
 
+  /* how long the line extends */
+  width:520px;             /* adjust */
+
+  border-radius:999px;
+
+  /* solid then slowly fades out */
+  background: linear-gradient(
+    to right,
+    #111827 0%,
+    #111827 40%,
+    rgba(17,24,39,0) 100%
+  );
+}
+4
     /* Cards */
     .grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:18px}
     .card{border:1px solid var(--line);border-radius:14px;padding:16px;background:var(--card-bg)}
@@ -107,10 +125,10 @@
       <div class="card">
         <h3>Key Dates</h3>
         <div class="muted">
-          <div><strong>Comp Team Showcase:</strong> 18th &amp; 19th April</div>
-          <div><strong>Origin Dance Convention:</strong> 1st – 3rd May</div>
-          <div><strong>Evolution Dance Competition:</strong> 28th May – 5th June</div>
-          <div><strong>Get The Beat Asia:</strong> 30th May – 7th June</div>
+          <div><strong>Comp Team Showcase:</strong> 18 &amp; 19 April</div>
+          <div><strong>Origin Dance Convention:</strong> 1 – 3 May</div>
+          <div><strong>Evolution Dance Competition:</strong> 28 May – 5 June</div>
+          <div><strong>Get The Beat Asia:</strong> 30 May – 7 June</div>
         </div>
       </div>
 
